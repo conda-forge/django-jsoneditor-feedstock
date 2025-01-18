@@ -1,27 +1,24 @@
 {% set name = "django-jsoneditor" %}
 {% set version = "0.0.12" %}
-{% set build = 1 %}
-{% set sha256 = "5f38e808cf6148fb38309551e8c76a19c6bff2403aff8456e798fd4944a97127" %}
 
 package:
   name: {{ name }}
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
-  url: https://pypi.python.org/packages/ae/b0/0164e082b29777fbc56c2373b68da93d23a29a040787e7f1c65e1562f133/django-jsoneditor-0.0.12.tar.gz
-  sha256: {{ sha256 }}
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/django-jsoneditor-{{ version }}.tar.gz
+  sha256: 5f38e808cf6148fb38309551e8c76a19c6bff2403aff8456e798fd4944a97127
 
 build:
   noarch: python
-  number: {{ build }}
-  script: {{ PYTHON }} -m pip install . --no-deps -vv
+  number: 1
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
     - python {{ python_min }}
+    - setuptools
     - pip
-
   run:
     - python >={{ python_min }}
     - packaging
@@ -36,10 +33,10 @@ test:
 
 about:
   home: https://github.com/nnseva/django-jsoneditor
-  summary: 'Django JSON Editor'
+  summary: Django JSON Editor
   dev_url: https://github.com/nnseva/django-jsoneditor
   license: LGPL-3.0
-  license_file: '{{ environ["RECIPE_DIR"] }}/LICENSE'  # When 0.0.13 is released the LICENSE file will be available
+  license_file: LICENSE
   license_family: LGPL
 
 extra:
